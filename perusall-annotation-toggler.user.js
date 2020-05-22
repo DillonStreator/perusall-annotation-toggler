@@ -9,7 +9,7 @@
 // @grant none
 // ==/UserScript==
 
-window.addEventListener("load", () => {
+const elementsLoaded = () => {
 	let hiding = false;
 	let timeout = 5000;
 	let timer = 0;
@@ -79,4 +79,14 @@ window.addEventListener("load", () => {
 		hiding = !hiding;
 		toggleVisibility();
 	});
+}
+
+window.addEventListener("load", () => {
+    const finderInterval = setInterval(() => {
+        const el = document.querySelector("#viewer-container");
+        if (el) {
+            clearInterval(finderInterval);
+            elementsLoaded();
+        }
+    }, 50);
 });
